@@ -1,0 +1,79 @@
+.thfont{
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+}
+
+.fw300{ font-weight: 300; }
+.fw400{ font-weight: 400; }
+.fw500{ font-weight: 500; }
+
+.main-menu nav ul .mega-menu .single-mega-menu h2{
+  font-family: 'Kanit', sans-serif;
+  font-weight: 400;
+  font-size: 1.2em;
+}
+
+.main-menu nav ul li a {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+}
+
+.input-hint{
+  padding-top: 4px;
+  font-size: 12px;
+}
+
+.memberPanal{
+  /*background: rgb(10, 116, 113);*/
+  color: rgb(66, 66, 66);
+  padding: 14px;
+  border: solid;
+  border-width: 1px;
+  border-style: dashed;
+  border-color: rgb(7, 144, 140)
+}
+
+.controlPanal{
+  color: rgb(66, 66, 66);
+  padding: 14px 0px;
+  /*border: solid;*/
+  /*border-width: 1px;*/
+  /*border-style: dashed;*/
+  /*border-color: rgb(7, 144, 140)*/
+}
+
+.footer-heading{
+  margin-bottom: 5px;
+}
+.footer-heading:after{
+  background: none;
+}
+.mn-link>li{
+  padding: 12px 0px;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+  border: solid;
+  border-style: ridge;
+  border-width: 0px 0px 2px 0px;
+  font-size: 1.3em;
+}
+
+
+hr.custom {
+  border: 0;
+  border-top: 1px dashed #8c8c8c;
+  text-align:center;
+}
+
+hr.custom:after {
+  content: 'หรือ';
+  display: inline-block;
+  position: relative;
+  top: -13px;
+  padding: 0 3px;
+  background: #fff;
+  color: #8c8c8c;
+  font-size: 18px;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+}
