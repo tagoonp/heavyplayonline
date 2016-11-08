@@ -58,7 +58,7 @@ if($activeSession){
       <hr class="custom">
       <div class="row">
         <div class="col-sm-12">
-          <button type="button" name="button" class="btn btn-primary btn-block thfont" style="font-weight: 500; font-size:20px;">Facebook login</button>
+          <a href="<?php echo $loginUrl; ?>"><button type="button" name="button" class="btn btn-primary btn-block thfont" style="font-weight: 500; font-size:20px;">Facebook login</button></a>
         </div>
       </div>
     </form>

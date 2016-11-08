@@ -27,7 +27,7 @@ $resultCategory = $db->select($strSQL,array('Y', 1));
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ขอใชเสนอราคา</title>
+        <title>ขอใบเสนอราคา</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -206,21 +206,43 @@ $resultCategory = $db->select($strSQL,array('Y', 1));
                       <h3 style="font-weight: 300; margin-bottom: 0px; color: rgb(255, 115, 0);" >Option 1 : ขอใบเสนอราคาจากข้อมูลความต้องการของท่าน</h3>
                       <form class="js-validation-bootstrap form-horizontal" id="quotationForm" action="" method="post" onsubmit="return false;" style="font-size: 16px;">
                         <div class="form-group" style="padding-top: 20px;">
+                            <label class="col-md-4 control-label" for="val-username" style="font-weight: 300;">ชื่อ-สกุล <span class="text-orange">*</span></label>
+                            <div class="col-md-7" id="req_3">
+                                <input class="form-control" type="text" id="val-name" name="val-name" placeholder="กรอกชื่อ-นามสกุล ..." value="<?php if(($userinfo['fname']!='') && ($userinfo['lname']!='')){ echo $userinfo['fname']." ".$userinfo['lname']; }?>" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="val-username" style="font-weight: 300;">E-mail <span class="text-orange">*</span></label>
+                            <div class="col-md-7" id="req_4">
+                                <input class="form-control" type="email" id="val-email" name="val-email" placeholder="กรอก E-mail ของท่าน..." value="<?php echo $userinfo['acc_email'];?>" />
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-4 control-label" for="val-username" style="font-weight: 300;">ข้อมูลสินค้า <span class="text-orange">*</span></label>
                             <div class="col-md-7" id="req_1">
-                                <textarea class="form-control" id="val-suggestions" name="val-suggestions" rows="8" placeholder="กรอกข้อมูลสินค้าที่ท่านต้องการให้เราจัดหา ..."></textarea>
+                                <textarea class="form-control" id="val-suggestions" name="val-suggestions" rows="8" placeholder="กรอกข้อมูลสินค้าที่ท่านต้องการให้เราจัดหา โดยระบุรุ่น และสเปคที่ท่านต้องการ ..."></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="val-email" style="font-weight: 300;">ยืนยันรหัสผ่านบัญชีผู้ใช้ของท่าน <span class="text-orange">*</span></label>
                             <div class="col-md-7" id="req_2">
-                                <input class="form-control" type="password" id="val-password" name="val-password" placeholder="Enter your password ..." />
+                                <input class="form-control" type="password" id="val-password" name="val-password" placeholder="กรอกรหัสผ่านของท่าน ..." />
                             </div>
                         </div>
 
                         <div class="form-group m-b-0">
                                                 <div class="col-md-8 col-md-offset-4">
-                                                    <button class="btn btn-app" type="submit">ส่งข้อมูล</button>
+                                                    <button class="btn btn-app" type="submit">ส่งข้อมูล</button>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#">ดูใบเสนอราคาของคุณ <?php
+                                                    $strSQL = "SELECT * FROM d4is_quotation WHERE qt_acc_id = ?";
+                                                    $resultQt = $db->select($strSQL, array($_SESSION[$sess.'Username']));
+
+                                                    $numofqt = 0;
+                                                    if($resultQt){
+                                                        $numofqt = sizeof($resultQt);
+                                                    }
+
+                                                    echo "( ".$numofqt." รายการ )";
+                                                    ?></a>
                                                 </div>
                                             </div>
                       </form>

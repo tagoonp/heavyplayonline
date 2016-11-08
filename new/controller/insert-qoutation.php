@@ -20,8 +20,8 @@ $strSQL = "SELECT * FROM ".$tbprefix."useraccount WHERE acc_id = ? AND 	acc_pass
 $resultCheck = $db->select($strSQL,array($_SESSION[$sess.'Username'], $hashPWD, 'Y'));
 
 if($resultCheck){
-  $strSQL = "INSERT INTO ".$tbprefix."quotation () VALUES ()";
-  $resultInsert = $db->insert($strSQL, array());
+  $strSQL = "INSERT INTO ".$tbprefix."quotation (qt_toname, qt_email, qt_info, qt_regdate, qt_acc_id) VALUES (?,?,?,?,?)";
+  $resultInsert = $db->insert($strSQL, array($_POST['name'], $_POST['email'], $_POST['information'], date('Y-m-d'), $_SESSION[$sess.'Username']));
   if($resultInsert){
     echo 'Y';
     $db->disconnect();
