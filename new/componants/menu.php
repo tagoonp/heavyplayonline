@@ -5,7 +5,36 @@
         <div class="main-menu hidden-xs">
           <nav id="custom-nav">
             <ul>
-              <li><a href="index.html">&bull; หน้าแรก</a></li>
+              <?php
+              $strSQL = "SELECT * FROM d4is_menus WHERE mn_position = ? AND mn_level = ? AND mn_status = ?";
+              $resultMenus = $db->select($strSQL,array('1', '1', 'Y'));
+              if($resultMenus){
+                foreach($resultMenus as $value){
+
+                  $strSQL = "SELECT * FROM d4is_menus WHERE mn_position = ? AND mn_level = ? AND mn_parent =? AND mn_status = ?";
+                  $resultMenus2 = $db->select($strSQL,array('1', '2', $value['mn_id'], 'Y'));
+                  if($resultMenus2){
+                    ?>
+                    <li><a href="<?php echo $value['mn_link'];?>">&bull; <?php echo $value['mn_text'];?></a>
+                      <ul class="hidden-xs">
+                    <?php
+                    foreach($resultMenus2 as $value2){
+                      ?>
+                      <li><a href="<?php echo $value2['mn_link'];?>">&bull; <?php echo $value2['mn_text'];?></a></li>
+                      <?php
+                    }
+                    ?></ul>
+                    </li>
+                    <?php
+                  }else{
+                    ?>
+                    <li><a href="<?php echo $value['mn_link'];?>">&bull; <?php echo $value['mn_text'];?></a></li>
+                    <?php
+                  }
+                }
+              }
+              ?>
+              <!-- <li><a href="index.html">&bull; หน้าแรก</a></li>
               <li><a href="shop.html">&bull; สินค้า</a>
                 <ul class="hidden-xs">
                   <li><a href="#">Labtops</a></li>
@@ -17,7 +46,7 @@
               <li><a href="contact.html">&bull; ขอใบเสนอราคา</a></li>
               <li><a href="contact.html">&bull; วิธีการสั่งซื้อ</a></li>
               <li><a href="contact.html">&bull; แจ้งชำระเงิน</a></li>
-              <li><a href="contact.html">&bull; ติดต่อเรา</a></li>
+              <li><a href="contact.html">&bull; ติดต่อเรา</a></li> -->
             </ul>
           </nav>
         </div>

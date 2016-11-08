@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+#RewriteBase /heavyplayonline/new/
+
+
+#RewriteRule ^content/$ content.php    [NC,L]
+#RewriteRule ^administrator/participant/$ administrator/participant.php    [NC,L]
+
+</IfModule>

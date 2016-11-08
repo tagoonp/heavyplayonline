@@ -22,9 +22,16 @@ if($activeSession){
               <div class="col-md-8 col-sm-8 col-xs-12">
                 <div class="header-top-right">
                   <ul class="list-inline">
-                    <li><a href="#"><i class="fa fa-user"></i>My Account</a></li>
-                    <li><a href="#"><i class="fa fa-heart"></i>Wishlist</a></li>
-                    <li><a href="checkout.html"><i class="fa fa-check-square-o"></i>Checkout</a></li>
+                    <ul class="list-inline">
+                      <li><a href="#"><i class="fa fa-user"></i>Howdy,
+                        <?php
+                        if($userinfo['fname']==''){
+                          echo $userinfo['acc_email'];
+                        }else{
+                          echo $userinfo['fname']." ".$userinfo['lname'];
+                        }
+                        ?>
+                        </a></li>
                     <li class="thfont"><a href="./signout.php"><i class="fa fa-lock"></i>ออกจากระบบ</a></li>
                   </ul>
                 </div>
@@ -64,7 +71,7 @@ if($activeSession){
                   </div>
                   <div class="header-search">
                     <form action="#">
-                      <input type="text" placeholder="My Search"/>
+                      <input type="text" placeholder="My Search" />
                       <button type="button"><i class="fa fa-search"></i></button>
                     </form>
                   </div>
@@ -103,7 +110,7 @@ if($activeSession){
                                                   </li>
                                               </ul>
                       </li>
-                      <li><a href="#">2 items</a></li>
+                      <!-- <li><a href="#">2 items</a></li> -->
                     </ul>
                   </div>
                 </div>
@@ -128,19 +135,6 @@ if($activeSession){
                   <ul class="list-inline">
                     <li><img src="img/flag.png" alt="flag"></li>
                     <li class="thfont">ภาษาไทย</li>
-                    <!-- <li class="dropdown"><a href="#" data-toggle="dropdown">English</a>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">Spanish</a></li>
-                        <li><a href="#">China</a></li>
-                      </ul>
-                    </li> -->
-                    <!-- <li class="dropdown"><a href="#" data-toggle="dropdown">USD</a>
-                      <ul class="dropdown-menu usd-dropdown">
-                        <li><a href="#">USD</a></li>
-                        <li><a href="#">GBP</a></li>
-                        <li><a href="#">EUR</a></li>
-                      </ul>
-                    </li> -->
                   </ul>
                 </div>
               </div>
@@ -148,8 +142,8 @@ if($activeSession){
             <div class="col-md-8 col-sm-8 col-xs-12">
               <div class="header-top-right">
                 <ul class="list-inline">
-                  <li class="thfont"><a href="#"><i class="fa fa-lock"></i>เข้าสู่ระบบ</a></li>
-                  <li class="thfont"><a href="#"><i class="fa fa-pencil-square-o"></i>ลงทะเบียน</a></li>
+                  <li class="thfont"><a href="my-account.php"><i class="fa fa-lock"></i>เข้าสู่ระบบ</a></li>
+                  <li class="thfont"><a href="my-account.php"><i class="fa fa-pencil-square-o"></i>ลงทะเบียน</a></li>
                 </ul>
               </div>
             </div>

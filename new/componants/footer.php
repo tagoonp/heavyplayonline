@@ -1,5 +1,5 @@
 <!-- Footer AREA -->
-<div class="footer-area">
+<div class="footer-area" style="margin-top: 30px;">
   <div class="footer-top" style="">
     <div class="container">
       <div class="row">
@@ -13,13 +13,6 @@
               ขาย ทุกอย่างเกี่ยวกับ Alienware ครับผม
               Gaming Notebook Notebook Desktop เลือกซื้อสเปคได้ตามใจชอบคับ
             </p>
-            <!-- <ul class="list-inline">
-              <li><a href="#"><img src="img/visa-card/visa-card-1.png" alt="card" class="img-responsive"></a></li>
-              <li><a href="#"><img src="img/visa-card/visa-card-2.png" alt="card" class="img-responsive"></a></li>
-              <li><a href="#"><img src="img/visa-card/visa-card-3.png" alt="card" class="img-responsive"></a></li>
-              <li><a href="#"><img src="img/visa-card/visa-card-4.png" alt="card" class="img-responsive"></a></li>
-            </ul> -->
-
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
@@ -27,10 +20,21 @@
             <h2 class="footer-heading thfont" style="">ข้อมูล</h2>
             <div class="footer-menu">
               <ul>
-                <li><a href="#" class="thfont"><i class="fa fa-angle-right"></i>หน้าแรก</a></li>
+                <?php
+                $strSQL = "SELECT * FROM ".$tbprefix."menus WHERE mn_level = ? AND mn_status = ?";
+                $resultMn = $db->select($strSQL, array('1','Y'));
+                if($resultMn){
+                  foreach ($resultMn as $value) {
+                    ?>
+                    <li><a href="<?php echo $value['mn_link']; ?>" class="thfont"><i class="fa fa-angle-right"></i><?php echo $value['mn_text']; ?></a></li>
+                    <?php
+                  }
+                }
+                ?>
+                <!-- <li><a href="#" class="thfont"><i class="fa fa-angle-right"></i>หน้าแรก</a></li>
                 <li><a href="#" class="thfont"><i class="fa fa-angle-right"></i>สินค้า</a></li>
                 <li><a href="#" class="thfont"><i class="fa fa-angle-right"></i>เกี่ยวกับเรา</a></li>
-                <li><a href="#" class="thfont"><i class="fa fa-angle-right"></i>ติดต่อเรา</a></li>
+                <li><a href="#" class="thfont"><i class="fa fa-angle-right"></i>ติดต่อเรา</a></li> -->
               </ul>
             </div>
           </div>

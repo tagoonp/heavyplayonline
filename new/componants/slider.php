@@ -33,7 +33,7 @@
             <h1 class="thfont" style="font-weight: 300;">เริ่มต้นเพียง $799.99</h1>
           </div>
           <div class="cap-readmore animated bounceIn" data-wow-duration="1.5s" data-wow-delay=".5s">
-            <a href="#" style="background: rgb(204, 77, 138); font-weight: 400;" class="thfont" >ดูข้อมูลสินค้า</a>
+            <a href="content.php?p=15" style="background: rgb(204, 77, 138); font-weight: 400;" class="thfont" >ดูข้อมูลสินค้า</a>
           </div>
         </div>
       </div>

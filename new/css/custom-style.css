@@ -77,3 +77,76 @@ hr.custom:after {
   font-family: 'Kanit', sans-serif;
   font-weight: 300;
 }
+
+.hr-custom2 {
+  border: 0;
+  background-color: #fff;
+  border-top: 1px dashed #8c8c8c;
+}
+
+.card{
+  padding-top: 30px;
+}
+
+.card-header{
+  padding: 15px 10px;
+  font-size: 20px;
+  border:none;
+  border-radius: 3px 3px 0px 0px;
+  font-family: 'Kanit', sans-serif;
+}
+
+.card-header-teal{
+  background: teal;
+  color: #fff;
+}
+
+.card-header-blue{
+  background: rgb(13, 99, 168);
+  color: #fff;
+}
+
+.card-content{
+  padding: 10px;
+  background: #fff;
+}
+
+strong{
+  font-weight:500;
+}
+
+.main-content,table,tbody,tr,td{
+  padding: 7px 10px;
+  font-size: 16px;
+  vertical-align: top;
+}
+
+.main-content,table,tbody,tr,td>h2{
+  font-weight: 300;
+}
+.main-content table tbody tr td>strong{
+  font-weight: 400;
+  color: rgb(21, 136, 172);
+}
+
+ul.subusermenu>li{
+  border: none;
+  border-width: 0px 0px 1px 0px;
+  padding: 5px;
+  /*margin: 5px;*/
+  width: 60%;
+}
+
+.btn-custom{
+  background-color: rgb(255, 115, 0);
+  color: rgb(255, 255, 255);
+  border-radius: 0px;
+  outline:none;
+}
+
+.btn-custom:hover{
+  background-color: rgb(255, 161, 0);
+  color: rgb(255, 255, 255);
+  border-radius: 0px;
+  outline:none;
+}

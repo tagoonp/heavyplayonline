@@ -12,180 +12,560 @@ $tbprefix = $db->getTablePrefix();
 
 include "../function/check-user.php";
 
-$strSQL = "SELECT * FROM ".$tbprefix."category WHERE cat_status = ?";
-$resultCategory = $db->select($strSQL,array('Y'));
-
+if(!$activeSession){
+  header('Location: ../');
+  die();
+}
 ?>
 <!DOCTYPE html>
-<html class="no-js" lang="">
+
+<html class="app-ui">
+
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>HeavyPlayOnline เล่นหนัก จัดเต็ม เล่น Alienware</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Meta -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-        <!-- Favicon
-		============================================ -->
-		<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.jpg">
+        <!-- Document title -->
+        <title>Heavyplay admin panal</title>
 
-		<!-- Fonts
-		============================================ -->
-		<link href='https://fonts.googleapis.com/css?family=Raleway:400,700,600,500,300,800,900' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,300,300italic,500italic,700' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Kanit:300,400,500" rel="stylesheet">
- 		<!-- CSS  -->
+        <meta name="description" content="AppUI - Admin Dashboard Template & UI Framework" />
+        <meta name="author" content="rustheme" />
+        <meta name="robots" content="noindex, nofollow" />
 
-		<!-- Bootstrap CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <!-- Favicons -->
+        <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.png" />
+        <link rel="icon" href="assets/img/favicons/favicon.ico" />
 
-		<!-- font-awesome.min CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
+        <!-- Google fonts -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,900%7CRoboto+Slab:300,400%7CRoboto+Mono:400" />
 
-		<!-- Mean Menu CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/meanmenu.min.css">
+        <!-- Page JS Plugins CSS -->
+        <link rel="stylesheet" href="assets/js/plugins/slick/slick.min.css" />
+        <link rel="stylesheet" href="assets/js/plugins/slick/slick-theme.min.css" />
 
-		<!-- owl.carousel CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/owl.carousel.css">
-
-		<!-- owl.theme CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/owl.theme.css">
-
-		<!-- owl.transitions CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/owl.transitions.css">
-
-		<!-- Price Filter CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/jquery-ui.min.css">
-
-		<!-- nivo-slider css
-		============================================ -->
-		<link rel="stylesheet" href="../css/nivo-slider.css">
-
- 		<!-- animate CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/animate.css">
-
-		<!-- jquery-ui-slider CSS
-		============================================ -->
-		<link rel="stylesheet" href="../css/jquery-ui-slider.css">
-
- 		<!-- normalize CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/normalize.css">
-
-
-    <!-- Sweet Alert
-    ================================== -->
-    <link rel="stylesheet" type="text/css" href="ext-lib/sweetalert/dist/sweetalert.css">
-
-    <!-- main CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/main.css">
-
-    <!-- style CSS
-		============================================ -->
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../css/custom-style.css">
-
-    <!-- responsive CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/responsive.css">
-
-    <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
+        <!-- AppUI CSS stylesheets -->
+        <link rel="stylesheet" id="css-font-awesome" href="assets/css/font-awesome.css" />
+        <link rel="stylesheet" id="css-ionicons" href="assets/css/ionicons.css" />
+        <link rel="stylesheet" id="css-bootstrap" href="assets/css/bootstrap.css" />
+        <link rel="stylesheet" id="css-app" href="assets/css/app.css" />
+        <link rel="stylesheet" id="css-app-custom" href="assets/css/app-custom.css" />
+        <!-- End Stylesheets -->
     </head>
-    <body class="home-one">
 
-      <?php include "../componants/admin/menu-admin.php"; ?>
+    <body class="app-ui layout-has-drawer layout-has-fixed-header">
+        <div class="app-layout-canvas">
+            <div class="app-layout-container">
 
-      <div class="">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="controlPanal" style="font-size: 0.8em;">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <ul class="mn-link br1">
-                      <li><a href="./"><i class="fa fa-dashboard" aria-hidden="true"></i> Dashboard</a></li>
-                      <li><a href="./post.php"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Posts</a></li>
-                      <li><a href="./page.php"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Pages</a></li>
-                      <li><a href="./upload.php"><i class="fa fa-photo" aria-hidden="true"></i> Media</a></li>
-                    </ul>
+                <!-- Drawer -->
+                <aside class="app-layout-drawer">
 
-                    <ul class="mn-link" style="padding-top: 10px;">
-                      <li style="font-weight: 500; color: rgb(3, 128, 111); font-size: 1.4em;">E-Commerce</li>
-                      <li><a href="./category.php"><i class="fa fa-bars" aria-hidden="true"></i> Category</a></li>
-                      <li><a href="./product.php"><i class="fa fa-suitcase" aria-hidden="true"></i> Products</a></li>
-                      <li><a href="./user.php"><i class="fa fa-user" aria-hidden="true"></i> Users</a></li>
-                    </ul>
+                    <!-- Drawer scroll area -->
+                    <div class="app-layout-drawer-scroll">
+                        <!-- Drawer logo -->
+                        <div id="logo" class="drawer-header">
+                            <a href="./"><img class="img-responsive" src="assets/img/logo/logo-backend.png" title="AppUI" alt="AppUI" /></a>
+                        </div>
 
-                    <ul class="mn-link" style="padding-top: 10px;">
-                      <li style="font-weight: 500; color: rgb(3, 128, 111); font-size: 1.4em;">Plugin</li>
-                      <li><a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> Quotation form</a></li>
-                      <li><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> Payment notification</a></li>
-                    </ul>
+                        <!-- Drawer navigation -->
+                        <nav class="drawer-main">
+                            <ul class="nav nav-drawer">
 
-                  </div>
-                </div>
-              </div>
+                                <li class="nav-item nav-drawer-header">Main</li>
+
+                                <li class="nav-item active">
+                                    <a href="./"><i class="ion-ios-speedometer-outline"></i> Dashboard</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="post.php?type=post"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Posts</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="post.php?type=page"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Pages</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="upload.php"><i class="fa fa-photo" aria-hidden="true"></i> Media</a>
+                                </li>
+
+                                <li class="nav-item nav-drawer-header">E-commerce</li>
+
+                                <li class="nav-item">
+                                    <a href="./category.php"><i class="fa fa-bars" aria-hidden="true"></i> Category</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="./product.php"><i class="fa fa-suitcase" aria-hidden="true"></i> Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="./user.php"><i class="fa fa-user" aria-hidden="true"></i> Users</a>
+                                </li>
+
+                                <li class="nav-item nav-drawer-header">Plugin</li>
+
+                                <li class="nav-item">
+                                    <a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> Quotation form</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> Payment notification</a>
+                                </li>
+
+                                <li class="nav-item nav-drawer-header">Other</li>
+
+                                <li class="nav-item nav-item-has-subnav">
+                                    <a href="javascript:void(0)"><i class="ion-ios-browsers-outline"></i> Appearance</a>
+                                    <ul class="nav nav-subnav">
+
+                                        <li>
+                                            <a href="menus.php">Menus</a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- End drawer navigation -->
+
+                        <div class="drawer-footer">
+                            <p class="copyright">AppUI Template &copy;</p>
+                            <a href="https://shapebootstrap.net/item/1525731-appui-admin-frontend-template/?ref=rustheme" target="_blank" rel="nofollow">Purchase a license</a>
+                        </div>
+                    </div>
+                    <!-- End drawer scroll area -->
+                </aside>
+                <!-- End drawer -->
+
+                <!-- Header -->
+                <header class="app-layout-header">
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar-collapse" aria-expanded="false">
+                          					<span class="sr-only">Toggle navigation</span>
+                          					<span class="icon-bar"></span>
+                          					<span class="icon-bar"></span>
+                          					<span class="icon-bar"></span>
+                          				</button>
+                                                          <button class="pull-left hidden-lg hidden-md navbar-toggle" type="button" data-toggle="layout" data-action="sidebar_toggle">
+                          					<span class="sr-only">Toggle drawer</span>
+                          					<span class="icon-bar"></span>
+                          					<span class="icon-bar"></span>
+                          					<span class="icon-bar"></span>
+                          				</button>
+                                <span class="navbar-page-title">
+                      					Dashboard
+                      				</span>
+                            </div>
+
+                            <?php include "componants/admin-menu.php"; ?>
+                        </div>
+                        <!-- .container-fluid -->
+                    </nav>
+                    <!-- .navbar-default -->
+                </header>
+                <!-- End header -->
+
+                <main class="app-layout-content">
+
+                    <!-- Page Content -->
+                    <div class="container-fluid p-y-md">
+                        <!-- Stats -->
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-3">
+                                <a class="card" href="javascript:void(0)">
+                                    <div class="card-block clearfix">
+                                        <div class="pull-right">
+                                            <p class="h6 text-muted m-t-0 m-b-xs">Revenue</p>
+                                            <p class="h3 text-blue m-t-sm m-b-0">$120.9k</p>
+                                        </div>
+                                        <div class="pull-left m-r">
+                                            <span class="img-avatar img-avatar-48 bg-blue bg-inverse"><i class="ion-ios-bell fa-1-5x"></i></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- .col-sm-6 -->
+
+                            <div class="col-sm-6 col-lg-3">
+                                <a class="card bg-green bg-inverse" href="javascript:void(0)">
+                                    <div class="card-block clearfix">
+                                        <div class="pull-right">
+                                            <p class="h6 text-muted m-t-0 m-b-xs">Total visitors</p>
+                                            <p class="h3 m-t-sm m-b-0">920 000</p>
+                                        </div>
+                                        <div class="pull-left m-r">
+                                            <span class="img-avatar img-avatar-48 bg-gray-light-o"><i class="ion-ios-people fa-1-5x"></i></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- .col-sm-6 -->
+
+                            <div class="col-sm-6 col-lg-3">
+                                <a class="card bg-blue bg-inverse" href="javascript:void(0)">
+                                    <div class="card-block clearfix">
+                                        <div class="pull-right">
+                                            <p class="h6 text-muted m-t-0 m-b-xs">Revenue</p>
+                                            <p class="h3 m-t-sm m-b-0">$340.5k</p>
+                                        </div>
+                                        <div class="pull-left m-r">
+                                            <span class="img-avatar img-avatar-48 bg-gray-light-o"><i class="ion-ios-speedometer fa-1-5x"></i></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- .col-sm-6 -->
+
+                            <div class="col-sm-6 col-lg-3">
+                                <a class="card bg-purple bg-inverse" href="javascript:void(0)">
+                                    <div class="card-block clearfix">
+                                        <div class="pull-right">
+                                            <p class="h6 text-muted m-t-0 m-b-xs">Messages</p>
+                                            <p class="h3 m-t-sm m-b-0">3 new</p>
+                                        </div>
+                                        <div class="pull-left m-r">
+                                            <span class="img-avatar img-avatar-48 bg-gray-light-o"><i class="ion-ios-email fa-1-5x"></i></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- .col-sm-6 -->
+                        </div>
+                        <!-- .row -->
+                        <!-- End stats -->
+
+                        <div class="row">
+                            <!-- Company overview Chart -->
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-header bg-blue bg-inverse">
+                                        <h4>Company overview</h4>
+                                        <ul class="card-actions">
+                                            <li>
+                                                <span class="label bg-green">Stat<span class="hidden-xs">istic</span>s <i class="ion-connection-bars"></i></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-block p-b-0 bg-blue bg-inverse">
+                                        <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
+                                        <div style="height: 200px;"><canvas class="js-chartjs-lines1"></canvas></div>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-xs-6 col-lg-3 b-r">
+                                                <p class="h6 small text-muted">Yearly change</p>
+                                                <p class="h3 m-t-0 m-b-md">+214.22</p>
+                                                <div class="progress progress-mini m-b-sm">
+                                                    <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="76" aria-valuemin="0" aria-valuemax="100" style="width: 76%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 col-lg-3 b-r visible-lg">
+                                                <p class="h6 small text-muted">Shares trade</p>
+                                                <p class="h3 m-t-0 m-b-md">$28.74M</p>
+                                                <div class="progress progress-mini m-b-sm">
+                                                    <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100" style="width: 84%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 col-lg-3 b-r visible-lg">
+                                                <p class="h6 small text-muted">Yearly change</p>
+                                                <p class="h3 m-t-0 m-b-md">+74%</p>
+                                                <div class="progress progress-mini m-b-sm">
+                                                    <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100" style="width: 74%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 col-lg-3">
+                                                <p class="h6 small text-muted">Total revenue</p>
+                                                <p class="h3 m-t-0 m-b-md">$74.23M</p>
+                                                <div class="progress progress-mini m-b-sm">
+                                                    <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- .row -->
+                                    </div>
+                                    <!-- .card-block -->
+                                </div>
+                                <!-- .card -->
+                            </div>
+                            <!-- .col-lg-8 -->
+                            <!-- End Company overview Chart -->
+
+                            <!-- Weekly transactions Widget -->
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Weekly transactions</h4>
+                                        <ul class="card-actions">
+                                            <li class="dropdown">
+                                                <button type="button" data-toggle="dropdown"><i class="ion-more"></i></button>
+                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                    <li class="dropdown-header">Profile</li>
+                                                    <li>
+                                                        <a tabindex="-1" href="javascript:void(0)"><span class="badge pull-right">3</span> News</a>
+                                                    </li>
+                                                    <li>
+                                                        <a tabindex="-1" href="javascript:void(0)"><span class="badge pull-right">1</span> Messages</a>
+                                                    </li>
+                                                    <li class="divider"></li>
+                                                    <li class="dropdown-header">More</li>
+                                                    <li>
+                                                        <a tabindex="-1" href="javascript:void(0)">Edit Profile..</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <!-- .card-actions -->
+                                    </div>
+                                    <!-- .card-header -->
+                                    <div class="card-block p-b-0">
+                                        <div style="height: 268px;"><canvas class="js-chartjs-lines2"></canvas></div>
+                                    </div>
+                                    <div class="card-block text-center">
+                                        <span class="label bg-green m-r-xs">Statistics <i class="ion-connection-bars"></i></span> <small>for the <a href="javascript:void(0)">last year</a></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .col-lg-4 -->
+                            <!-- End Weekly transactions Widget -->
+                        </div>
+                        <!-- .row -->
+
+                        <div class="row">
+
+                            <div class="col-lg-4">
+                                <!-- Weekly users Widget -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Weekly users</h4>
+                                        <ul class="card-actions">
+                                            <li class="dropdown">
+                                                <button type="button" data-toggle="dropdown"><i class="ion-more"></i></button>
+                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                    <li class="dropdown-header">Profile</li>
+                                                    <li>
+                                                        <a tabindex="-1" href="javascript:void(0)"><span class="badge pull-right">3</span> News</a>
+                                                    </li>
+                                                    <li>
+                                                        <a tabindex="-1" href="javascript:void(0)"><span class="badge pull-right">1</span> Messages</a>
+                                                    </li>
+                                                    <li class="divider"></li>
+                                                    <li class="dropdown-header">More</li>
+                                                    <li>
+                                                        <a tabindex="-1" href="javascript:void(0)">Edit Profile..</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-block">
+                                        <div style="height: 238px;"><canvas class="js-chartjs-bars"></canvas></div>
+                                    </div>
+                                    <div class="card-block text-center">
+                                        <span class="label bg-green m-r-xs">Statistics <i class="ion-connection-bars"></i></span> <small>for the <a href="javascript:void(0)">last year</a></small>
+                                    </div>
+                                </div>
+                                <!-- .card -->
+                                <!-- End Weekly users Widget -->
+                            </div>
+                            <!-- .col-lg-4 -->
+
+                            <div class="col-lg-8">
+                                <!-- Transactions history Widget -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Transactions history</h4>
+                                        <ul class="card-actions">
+                                            <li class="dropdown">
+                                                <button type="button" data-toggle="dropdown"><i class="ion-more"></i></button>
+                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                    <li class="dropdown-header">Profile</li>
+                                                    <li>
+                                                        <a tabindex="-1" href="javascript:void(0)"><span class="badge pull-right">3</span> News</a>
+                                                    </li>
+                                                    <li>
+                                                        <a tabindex="-1" href="javascript:void(0)"><span class="badge pull-right">1</span> Messages</a>
+                                                    </li>
+                                                    <li class="divider"></li>
+                                                    <li class="dropdown-header">More</li>
+                                                    <li>
+                                                        <a tabindex="-1" href="javascript:void(0)">Edit Profile..</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-block">
+                                        <div style="height: 238px;"><canvas class="js-chartjs-lines3"></canvas></div>
+                                    </div>
+                                    <div class="card-block text-center">
+                                        <span class="label bg-green m-r-xs">Statistics <i class="ion-connection-bars"></i></span> <small>for the <a href="javascript:void(0)">last year</a></small>
+                                    </div>
+                                </div>
+                                <!-- .card -->
+                                <!-- End Transactions history Widget -->
+                            </div>
+                            <!-- .col-lg-8 -->
+                        </div>
+                        <!-- .row -->
+
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <!-- Yearly summary widget -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Yearly summary</h4>
+                                        <ul class="card-actions">
+                                            <li class="dropdown">
+                                                <button type="button" data-toggle="dropdown"><i class="ion-more"></i></button>
+                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                    <li class="dropdown-header">Profile</li>
+                                                    <li>
+                                                        <a tabindex="-1" href="javascript:void(0)"><span class="badge pull-right">3</span> News</a>
+                                                    </li>
+                                                    <li>
+                                                        <a tabindex="-1" href="javascript:void(0)"><span class="badge pull-right">1</span> Messages</a>
+                                                    </li>
+                                                    <li class="divider"></li>
+                                                    <li class="dropdown-header">More</li>
+                                                    <li>
+                                                        <a tabindex="-1" href="javascript:void(0)">Edit Profile..</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <!-- .card-actions -->
+                                    </div>
+                                    <!-- .card-header -->
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <p class="h6 small text-muted">Yearly change</p>
+                                                <p class="h3 m-t-0">+214.22</p>
+                                                <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
+                                                <div style="height: 120px;"><canvas class="js-chartjs-lines4"></canvas></div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <p class="h6 small text-muted">Shares trade</p>
+                                                <p class="h3 m-t-0">$28.74M</p>
+                                                <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
+                                                <div style="height: 120px;"><canvas class="js-chartjs-lines5"></canvas></div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <p class="h6 small text-muted">Yearly change</p>
+                                                <p class="h3 m-t-0">+74%</p>
+                                                <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
+                                                <div style="height: 120px;"><canvas class="js-chartjs-lines6"></canvas></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .card-block -->
+                                </div>
+                                <!-- .card -->
+                                <!-- End Yearly summary widget -->
+                            </div>
+                            <!-- .col-lg-8 -->
+
+                            <!-- Server load Widget -->
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-header bg-purple bg-inverse">
+                                        <h4>Server load</h4>
+                                        <ul class="card-actions">
+                                            <li>
+                                                <span class="js-flot-live-info"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-block bg-purple p-x-0 p-b-0">
+                                        <!-- Live Chart Container -->
+                                        <div class="js-flot-live" style="height: 207px;"></div>
+                                    </div>
+                                </div>
+                                <!-- .card -->
+                            </div>
+                            <!-- End Server load Widget // .col-lg-4 -->
+                        </div>
+                        <!-- .row -->
+                    </div>
+                    <!-- .container-fluid -->
+                    <!-- End Page Content -->
+
+                </main>
+
             </div>
-          </div>
+            <!-- .app-layout-container -->
         </div>
-      </div>
-        <!-- Product AREA -->
+        <!-- .app-layout-canvas -->
 
+        <!-- Apps Modal -->
+        <!-- Opens from the button in the header -->
+        <div id="apps-modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-sm modal-dialog modal-dialog-top">
+                <div class="modal-content">
+                    <!-- Apps card -->
+                    <div class="card m-b-0">
+                        <div class="card-header bg-app bg-inverse">
+                            <h4>Apps</h4>
+                            <ul class="card-actions">
+                                <li>
+                                    <button data-dismiss="modal" type="button"><i class="ion-close"></i></button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-block">
+                            <div class="row text-center">
+                                <div class="col-xs-6">
+                                    <a class="card card-block m-b-0 bg-app-secondary bg-inverse" href="./">
+                                        <i class="ion-speedometer fa-4x"></i>
+                                        <p>Admin</p>
+                                    </a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a class="card card-block m-b-0 bg-app-tertiary bg-inverse" href="frontend_home.html">
+                                        <i class="ion-laptop fa-4x"></i>
+                                        <p>Frontend</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- .card-block -->
+                    </div>
+                    <!-- End Apps card -->
+                </div>
+            </div>
+        </div>
+        <!-- End Apps Modal -->
 
-        <!-- JS -->
+        <div class="app-ui-mask-modal"></div>
 
- 		<!-- jquery-1.11.3.min js
-		============================================ -->
-        <script src="../js/vendor/jquery-1.11.3.min.js"></script>
+        <!-- AppUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock and App.js -->
+        <script src="assets/js/core/jquery.min.js"></script>
+        <script src="assets/js/core/bootstrap.min.js"></script>
+        <script src="assets/js/core/jquery.slimscroll.min.js"></script>
+        <script src="assets/js/core/jquery.scrollLock.min.js"></script>
+        <script src="assets/js/core/jquery.placeholder.min.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/app-custom.js"></script>
 
- 		<!-- bootstrap js
-		============================================ -->
-        <script src="../js/bootstrap.min.js"></script>
+        <!-- Page Plugins -->
+        <script src="assets/js/plugins/slick/slick.min.js"></script>
+        <script src="assets/js/plugins/chartjs/Chart.min.js"></script>
+        <script src="assets/js/plugins/flot/jquery.flot.min.js"></script>
+        <script src="assets/js/plugins/flot/jquery.flot.pie.min.js"></script>
+        <script src="assets/js/plugins/flot/jquery.flot.stack.min.js"></script>
+        <script src="assets/js/plugins/flot/jquery.flot.resize.min.js"></script>
 
-		<!-- nivo slider js
-		============================================ -->
-		<script src="../js/jquery.nivo.slider.pack.js"></script>
+        <!-- Page JS Code -->
+        <script src="assets/js/pages/index.js"></script>
+        <script>
+            $(function()
+            {
+                // Init page helpers (Slick Slider plugin)
+                App.initHelpers('slick');
+            });
+        </script>
 
- 		<!-- Mean Menu js
-		============================================ -->
-    <script src="../js/jquery.meanmenu.min.js"></script>
-
-   	<!-- owl.carousel.min js
-		============================================ -->
-    <script src="../js/owl.carousel.min.js"></script>
-
-
-    <!-- Sweetalert
-    ============================ -->
-    <script src="ext-lib/sweetalert/dist/sweetalert.min.js"></script>
-
-		<!-- jquery price slider js
-		============================================ -->
-		<script src="../js/jquery-price-slider.js"></script>
-
-		<!-- wow.js
-		============================================ -->
-    <script src="../js/wow.js"></script>
-		<script>
-			new WOW().init();
-		</script>
-
-   	<!-- plugins js
-		============================================ -->
-    <script src="../js/plugins.js"></script>
-
-   	<!-- main js
-		============================================ -->
-    <script src="../js/main.js"></script>
-    <script src="../js/custom-app.js"></script>
     </body>
+
 </html>
