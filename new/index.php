@@ -4,6 +4,8 @@ session_start();
 include "xplor-config.php";
 include "xplor-connect.php";
 
+require 'config.php';
+
 $db = new database();
 $db->connect();
 
@@ -14,49 +16,6 @@ include "function/check-user.php";
 
 $strSQL = "SELECT * FROM ".$tbprefix."category WHERE cat_status = ?";
 $resultCategory = $db->select($strSQL,array('Y'));
-
-require 'ext-lib/sdk/facebook.php';
-
-$facebook = new Facebook(array(
-  'appId'  => '1023773327731727',
-  'secret' => '75162ef2ebb6b864347d3d07a44de54a',
-));
-
-// Get User ID
-$user = $facebook->getUser();
-
-if ($user) {
-  try {
-    $user_profile = $facebook->api('/me');
-  } catch (FacebookApiException $e) {
-    error_log($e);
-    $user = null;
-  }
-}
-
-if ($user) {
-  $logoutUrl = $facebook->getLogoutUrl();
-} else {
-  $loginUrl = $facebook->getLoginUrl();
-}
-
-// Save to mysql
-if ($user) {
-	if($_GET["code"] != "")
-	{
-				$strSQL ="  INSERT INTO  tb_facebook (FACEBOOK_ID,NAME,LINK,CREATE_DATE)
-					VALUES
-					('".trim($user_profile["id"])."',
-					'".trim($user_profile["name"])."',
-					'".trim($user_profile["link"])."',
-					'".trim(date("Y-m-d H:i:s"))."')";
-				$objQuery = $db->insert($strSQL,array());
-				$db->disconnect();
-				header("location:index.php");
-				exit();
-	}
-}
-
 
 ?>
 <!DOCTYPE html>
@@ -142,6 +101,7 @@ if ($user) {
     <link rel="stylesheet" href="css/responsive.css">
 
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
     </head>
     <body class="home-one">
 
@@ -455,23 +415,8 @@ if ($user) {
 		============================================ -->
     <script src="js/main.js"></script>
     <script src="js/custom-app.js"></script>
+    <script src="js/fb-script.js"></script>
 
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '1023773327731727',
-          xfbml      : true,
-          version    : 'v2.6'
-        });
-      };
-
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
     </body>
+
 </html>

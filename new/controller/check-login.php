@@ -16,8 +16,8 @@ $ip = $_SERVER['REMOTE_ADDR'];
 
 $hashPWD = hash_hmac('md5', $_POST['password'], $salt);
 
-$strSQL = "SELECT * FROM ".$tbprefix."useraccount WHERE acc_email = ? AND acc_password = ? AND acc_activestatus = ?";
-$resultCheck = $db->select($strSQL,array($_POST['username'], $hashPWD, 'Y'));
+$strSQL = "SELECT * FROM ".$tbprefix."useraccount WHERE acc_email = ? AND acc_password = ? AND acc_activestatus = ? AND acc_regby = ?";
+$resultCheck = $db->select($strSQL,array($_POST['username'], $hashPWD, 'Y', 'Normal'));
 
 if($resultCheck){
   $row = $resultCheck->fetch();
